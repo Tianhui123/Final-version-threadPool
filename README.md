@@ -7,3 +7,8 @@
 5、使用vector和queue来管理线程对象和提交的线程任务。
 6、基于互斥锁mutex和条件变量condition_variable实现任务提交线程和任务执行线程之间的通信机制。
 7、线程支持fixed模式和catched模式，可适应不同环境（未完善）。
+Notes:最初设计submit返回值时，我自己写了一个返回值Result类、信号量Semaphore类以及能够接收任何数据类型的Any类；
+Any通过多态和模板编程实现；
+Semaphore通过条件变量condition、互斥锁mutex和计数变量来实现；
+Result用Semaphore进行线程间的通信，使用指针在heap上开辟一个Any对象来保存任务的运行结果。
+通过上述方法来完成submit返回值的获取。不过后来我发现有更完善的future库，便改用了future。
